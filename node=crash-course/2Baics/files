@@ -1,0 +1,47 @@
+const fs = require("fs"); // importing the fs module
+//reading files
+fs.readFile("./docs/blogs.txt", (err, data) => {
+  if (err) {
+    console.log(err);
+  }
+  //console.log(data); // prints the buffer object
+  // converting the buffer object to string and printing it
+  console.log(data.toString());
+});
+
+//writing files
+fs.writeFile("./docs/blogs1.txt", "hello world", () => {
+  console.log("file written");
+});
+
+//directory
+//creating a directory
+if (!fs.existsSync("./assets")) {
+  fs.mkdir("./assets", (err) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log("folder created");
+  });
+} else {
+  //deleting a directory
+  fs.rmdir("./assets", (err) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log("folder deleted");
+  });
+}
+
+//delete files
+if (fs.existsSync("./docs/deleteme.txt")) {
+  fs.unlink("./docs/deleteme.txt", (err) => {
+    console.log(err);
+  });
+} else {
+  console.log("file not found");
+  //create a file
+  fs.writeFile("./docs/deleteme.txt", "hello world", () => {
+    console.log("file created");
+  });
+}
